@@ -1,0 +1,81 @@
+package org.example;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import java.util.List;
+
+public class FacebookTestCase1 {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        // Set the path to the chromedriver executable
+        System.setProperty("webdriver.chrome.driver", "D:\\Downloads\\chromedriver_win32 (1)\\chromedriver.exe");
+
+        // Create ChromeOptions instance and disable notifications
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+
+        // Create a new instance of the ChromeDriver with options
+        WebDriver driver = new ChromeDriver(options);
+
+        // Navigate to the Facebook website
+        driver.get("https://www.facebook.com/");
+
+        // Find the cookie notification and click the "Accept" or "Okay" button
+        List<WebElement> cookieNotifications = driver.findElements(By.xpath("//button[@title='Tillåt endast nödvändiga cookies']"));
+        if (cookieNotifications.size() > 0) {
+            cookieNotifications.get(0).click();
+            System.out.println("Clicked on the cookie notification button");
+        } else {
+            System.out.println("No cookie notification found on the page");
+        }
+
+        // Test case 1: Login and Logout functionality
+        // Enter login credentials and click login button
+        WebElement emailInput = driver.findElement(By.id("email"));
+        WebElement passwordInput = driver.findElement(By.id("pass"));
+        emailInput.sendKeys("ciobanu.alex90@yahoo.com");
+        passwordInput.sendKeys("Bybanu1990@fb");
+        WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
+        loginButton.click();
+
+        // Verify that user is logged in and redirected to their profile page
+        String expectedUrl = "https://www.facebook.com/";
+        String actualUrl = driver.getCurrentUrl();
+        if (actualUrl.equals(expectedUrl)) {
+            System.out.println("Login successful");
+        } else {
+            System.out.println("Login failed");
+        }
+       Thread.sleep(1000);
+
+        // Click logout button and verify that user is logged out and redirected to login page
+        WebElement svgImage = driver.findElement(By.className("x3ajldb"));
+        svgImage.click();
+        System.out.println("Clicked on the Account image");
+
+         Thread.sleep(1000);
+        WebElement logoutLink = driver.findElement(By.xpath("//span[text()='Log Out']"));
+        logoutLink.click();
+
+        System.out.println("Clicked on the logout");
+       Thread.sleep(1000);
+
+        String loginPageUrl = "https://www.facebook.com/";
+
+        // Logout code here
+
+        if (driver.getCurrentUrl().equals(loginPageUrl)) {
+            System.out.println("Logout failed");
+        } else {
+            System.out.println("Logged out successfully");
+        }
+
+        // Close the browser
+        driver.quit();
+    }
+}
