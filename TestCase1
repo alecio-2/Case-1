@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
-public class FacebookTestCase1 {
+public class FacebookTestCase1v2 {
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -38,8 +38,8 @@ public class FacebookTestCase1 {
         // Enter login credentials and click login button
         WebElement emailInput = driver.findElement(By.id("email"));
         WebElement passwordInput = driver.findElement(By.id("pass"));
-        emailInput.sendKeys("YOUR-USERNAME");
-        passwordInput.sendKeys("YOUR-PASSWORD");
+        emailInput.sendKeys("farapix@yahoo.com");
+        passwordInput.sendKeys("Bybanu1990@facebook");
         WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
         loginButton.click();
 
@@ -51,6 +51,9 @@ public class FacebookTestCase1 {
         } else {
             System.out.println("Login failed");
         }
+
+        driver.get("https://www.facebook.com/me");
+
        Thread.sleep(1000);
 
         // Click logout button and verify that user is logged out and redirected to login page
