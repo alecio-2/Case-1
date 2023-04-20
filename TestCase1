@@ -38,8 +38,8 @@ public class FacebookTestCase1 {
         // Enter login credentials and click login button
         WebElement emailInput = driver.findElement(By.id("email"));
         WebElement passwordInput = driver.findElement(By.id("pass"));
-        emailInput.sendKeys("ciobanu.alex90@yahoo.com");
-        passwordInput.sendKeys("Bybanu1990@fb");
+        emailInput.sendKeys("YOUR-USERNAME");
+        passwordInput.sendKeys("YOUR-PASSWORD");
         WebElement loginButton = driver.findElement(By.xpath("//button[@name='login']"));
         loginButton.click();
 
